@@ -327,12 +327,15 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/panier', [App\Http\Controllers\PanierController::class, 'index'])->name('panier.index');
 
-	Route::get('/panier/items', [PanierController::class, 'getItems'])->name('panier.items');
 	// Route::post('/panier/supprimer', 'PanierController@supprimer')->name('panier.supprimer');
 
 	Route::post('/panier/supprimer', [PanierController::class, 'supprimer'])->name('panier.supprimer');
 	// Route::post('/panier/ajouter', [PanierController::class, 'panier.ajouter']);
 	Route::post('/panier/ajouter', [App\Http\Controllers\PanierController::class, 'ajouter'])->name('panier.ajouter');
+	Route::get('/panier/items', 'PanierController@getItems');
+	Route::get('/panier/count', [PanierController::class, 'getItemsCount']);
+	Route::get('/panier/items', [PanierController::class, 'getCartItems']);
+
 
 	Route::get('/panier/check/{formationId}', [PanierController::class,'checkInCart'])->name('panier.check');
 	// Route::get('/panier/items-count', [PanierController::class, 'getItemsCount'])->name('panier.items-count');

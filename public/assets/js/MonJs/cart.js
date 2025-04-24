@@ -1,20 +1,15 @@
 
-/**
- * Fichier de gestion du panier d'achat pour les formations
- * Permet d'ajouter, supprimer et vérifier les formations dans le panier
- */
-// Ajouter cet écouteur d'événement pour détecter quand l'utilisateur revient à la page
-window.addEventListener('pageshow', function(event) {
-    // Le event.persisted est true si la page est chargée depuis le cache (retour arrière)
-    if (event.persisted) {
-        console.log("Utilisateur revenu sur la page via navigation arrière");
-        // Vérifier immédiatement l'état des formations dans le panier
-        checkFormationsInCart();
-    }
-});
 document.addEventListener('DOMContentLoaded', function() {
     // Récupération du token CSRF pour les requêtes AJAX
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    
+    // Variable pour suivre les requêtes en cours
+    let pendingRequests = {};
+    
+    // Fonction pour stocker les IDs des formations dans le panier
+    function storeCartFormationsInLocalStorage(formationIds) {
+        localStorage.setItem('cartFormations', JSON.stringify(formationIds));
+    }
     
     // Initialisation du compteur de panier
     initializeCartCounter();
@@ -78,11 +73,20 @@ document.addEventListener('DOMContentLoaded', function() {
             if (addToCartBtn) {
                 event.preventDefault();
                 
-                // Vérifier si le bouton a déjà l'attribut data-in-cart
-                if (addToCartBtn.getAttribute('data-in-cart') === 'true' || addToCartBtn.disabled) {
-                    console.log("Produit déjà dans le panier");
+                // Empêcher les clics multiples rapides
+                if (addToCartBtn.classList.contains('processing')) {
                     return;
                 }
+                
+                // Vérifier si le bouton a déjà l'attribut data-in-cart
+                if (addToCartBtn.getAttribute('data-in-cart') === 'true') {
+                    // Si le produit est déjà dans le panier, rediriger vers la page panier
+                    window.location.href = '/panier';
+                    return;
+                }
+                
+                // Marquer le bouton comme étant en cours de traitement
+                addToCartBtn.classList.add('processing');
                 
                 // Rechercher l'ID de formation
                 let formationId;
@@ -104,70 +108,73 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
                 if (formationId) {
-                    addToCart(formationId, true); // Rediriger vers le panier
+                    // Éviter les appels multiples pour le même ID
+                    if (pendingRequests[formationId]) {
+                        return;
+                    }
+                    
+                    pendingRequests[formationId] = true;
+                    addToCart(formationId, false, function() {
+                        // Callback pour réinitialiser l'état après le traitement
+                        addToCartBtn.classList.remove('processing');
+                        delete pendingRequests[formationId];
+                    });
+                } else {
+                    addToCartBtn.classList.remove('processing');
                 }
             }
         });
-    // Pour les boutons "Ajouter au panier"
-// document.addEventListener('click', function(event) {
-//     const addToCartBtn = event.target.closest('.addcart-btn .btn[href="/panier"]');
-//     if (addToCartBtn) {
-//         // Si le bouton est désactivé, ne rien faire
-//         if (addToCartBtn.disabled) {
-//             event.preventDefault();
-//             return;
-//         }
         
-//         event.preventDefault();
-        
-//         // Rechercher l'ID de formation
-//         let formationId;
-//         const modalContent = addToCartBtn.closest('.modal-content');
-//         if (modalContent) {
-//             // Si le bouton est dans un modal
-//             formationId = modalContent.closest('.modal').id.split('-').pop();
-//         } else {
-//             // Si le bouton est sur une carte de formation
-//             const formationCard = addToCartBtn.closest('.formation-item, .product-box');
-//             if (formationCard) {
-//                 formationId = formationCard.closest('[data-category-id]')?.dataset.categoryId;
-                
-//                 // Alternative si data-category-id n'est pas trouvé
-//                 if (!formationId && formationCard.hasAttribute('data-formation-id')) {
-//                     formationId = formationCard.getAttribute('data-formation-id');
-//                 }
-//             }
-//         }
-        
-//         if (formationId) {
-//             addToCart(formationId, true); // Rediriger vers le panier
-//         }
-//     }
-
-// });
         // Pour les boutons "Supprimer" dans le panier
         document.querySelectorAll('.remove-link').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
+                
+                // Empêcher les clics multiples rapides
+                if (this.classList.contains('processing')) {
+                    return;
+                }
+                
+                this.classList.add('processing');
                 const formationId = this.getAttribute('data-formation-id');
-                removeFromCart(formationId);
+                
+                if (pendingRequests[formationId]) {
+                    this.classList.remove('processing');
+                    return;
+                }
+                
+                pendingRequests[formationId] = true;
+                removeFromCart(formationId, () => {
+                    this.classList.remove('processing');
+                    delete pendingRequests[formationId];
+                });
             });
         });
         
-        // Vérifier si les formations sont dans le panier au chargement de la page
-        checkFormationsInCart();
+        // Vérifier si les formations sont dans le panier au chargement de la page, mais une seule fois
+        if (!window.formationsChecked) {
+            window.formationsChecked = true;
+            checkFormationsInCart();
+        }
     }
     
     /**
      * Ajoute une formation au panier
      * @param {string|number} formationId - L'ID de la formation à ajouter
      * @param {boolean} redirectToCart - Si true, redirige vers la page panier après l'ajout
+     * @param {function} callback - Fonction appelée une fois l'opération terminée
      */
-  
-
-    function addToCart(formationId, redirectToCart = false) {
-        // Ne pas désactiver le bouton immédiatement - seulement stocker l'ID pour le retour arrière
+    function addToCart(formationId, redirectToCart = false, callback = null) {
+        // Vérifier d'abord si cette formation est déjà dans le localStorage
+        const cartFormations = JSON.parse(localStorage.getItem('cartFormations') || '[]');
+        if (cartFormations.includes(formationId.toString())) {
+            showNotification('Cette formation est déjà dans votre panier', 'info');
+            if (callback) callback();
+            return;
+        }
+        
         localStorage.setItem('lastAddedFormation', formationId);
+        updateAddToCartButton(formationId, true); // Mettre à jour le bouton immédiatement pour le feedback visuel
         
         fetch('/panier/ajouter', {
             method: 'POST',
@@ -187,30 +194,42 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('cartCount', data.cartCount.toString());
                 updateCartBadge(data.cartCount);
                 
-                // Si on doit rediriger, ne pas mettre à jour l'état du bouton
+                // Ajouter la formation au localStorage seulement si elle n'y est pas déjà
+                if (!cartFormations.includes(formationId.toString())) {
+                    cartFormations.push(formationId.toString());
+                    storeCartFormationsInLocalStorage(cartFormations);
+                    showNotification(data.message, 'success');
+                }
+                
+                updateAddToCartButton(formationId, true);
+                
                 if (redirectToCart) {
                     window.location.href = '/panier';
-                } else {
-                    // Seulement désactiver le bouton si on ne redirige pas
-                    updateAddToCartButton(formationId, true);
-                    showNotification(data.message, 'success');
                 }
             } else {
                 localStorage.removeItem('lastAddedFormation');
+                updateAddToCartButton(formationId, false); // Réinitialiser le bouton
                 showNotification(data.message, 'error');
             }
+            
+            if (callback) callback();
         })
         .catch(error => {
             console.error('Erreur lors de l\'ajout au panier:', error);
             localStorage.removeItem('lastAddedFormation');
+            updateAddToCartButton(formationId, false); // Réinitialiser le bouton
             showNotification('Une erreur est survenue lors de l\'ajout au panier.', 'error');
+            
+            if (callback) callback();
         });
     }
+    
     /**
      * Supprime une formation du panier
      * @param {string|number} formationId - L'ID de la formation à supprimer
+     * @param {function} callback - Fonction appelée une fois l'opération terminée
      */
-    function removeFromCart(formationId) {
+    function removeFromCart(formationId, callback = null) {
         fetch('/panier/supprimer', {
             method: 'POST',
             headers: {
@@ -228,6 +247,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Mise à jour du compteur
                 localStorage.setItem('cartCount', data.cartCount.toString());
                 updateCartBadge(data.cartCount);
+                
+                // Retirer la formation du localStorage
+                const cartFormations = JSON.parse(localStorage.getItem('cartFormations') || '[]');
+                const updatedFormations = cartFormations.filter(id => id !== formationId.toString());
+                storeCartFormationsInLocalStorage(updatedFormations);
                 
                 // Supprimer l'élément de la liste si nous sommes sur la page panier
                 const formationItem = document.querySelector(`.formation-item[data-formation-id="${formationId}"]`);
@@ -250,15 +274,21 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 showNotification(data.message, 'error');
             }
+            
+            if (callback) callback();
         })
         .catch(error => {
             console.error('Erreur lors de la suppression du panier:', error);
             showNotification('Une erreur est survenue lors de la suppression.', 'error');
+            
+            if (callback) callback();
         });
     }
     
-
     function checkFormationsInCart() {
+        // Récupérer les formations déjà connues du localStorage
+        const cartFormations = JSON.parse(localStorage.getItem('cartFormations') || '[]');
+        
         // Vérifier d'abord la dernière formation ajoutée (pour une mise à jour rapide lors du retour arrière)
         const lastAddedFormation = localStorage.getItem('lastAddedFormation');
         if (lastAddedFormation) {
@@ -266,11 +296,22 @@ document.addEventListener('DOMContentLoaded', function() {
             // Désactiver immédiatement le bouton pour la dernière formation ajoutée
             updateAddToCartButton(lastAddedFormation, true);
             
-            // Ne pas effacer cette information pour qu'elle persiste même après les retours arrière
+            // Ajouter cette formation aux formations du panier si elle n'y est pas déjà
+            if (!cartFormations.includes(lastAddedFormation)) {
+                cartFormations.push(lastAddedFormation);
+                storeCartFormationsInLocalStorage(cartFormations);
+            }
+            
+            // Supprimer cette information maintenant qu'elle a été traitée
             localStorage.removeItem('lastAddedFormation');
         }
         
-        // Ensuite, vérifier toutes les formations via l'API pour être sûr
+        // Mettre à jour tous les boutons pour les formations connues du localStorage
+        cartFormations.forEach(formationId => {
+            updateAddToCartButton(formationId, true);
+        });
+        
+        // Ensuite, synchroniser avec le serveur
         fetch('/panier/items', {
             method: 'GET',
             headers: {
@@ -281,109 +322,57 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             if (data.items && Array.isArray(data.items)) {
-                // Mettre à jour tous les boutons pour les formations dans le panier
-                data.items.forEach(item => {
-                    if (item.formation_id) {
-                        updateAddToCartButton(item.formation_id, true);
-                    }
+                // Créer un nouvel array des IDs de formations
+                const serverFormationIds = data.items.map(item => item.formation_id.toString());
+                
+                // Mettre à jour le localStorage avec les données du serveur (plus fiables)
+                storeCartFormationsInLocalStorage(serverFormationIds);
+                
+                // Mettre à jour tous les boutons
+                serverFormationIds.forEach(formationId => {
+                    updateAddToCartButton(formationId, true);
                 });
+                
+                // Mettre à jour le compteur du panier
+                if (serverFormationIds.length !== parseInt(localStorage.getItem('cartCount') || '0', 10)) {
+                    localStorage.setItem('cartCount', serverFormationIds.length.toString());
+                    updateCartBadge(serverFormationIds.length);
+                }
             }
         })
         .catch(error => console.error('Erreur lors de la vérification du panier:', error));
-        
-        // Vérification individuelle des formations (garde cette partie comme fallback)
-        const formationCards = document.querySelectorAll('.formation-item, .product-box');
-        const modals = document.querySelectorAll('.modal[id^="formation-modal-"]');
-        
-        // Fonction pour vérifier une formation spécifique
-        function checkSingleFormation(formationId) {
-            fetch(`/panier/check/${formationId}`, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                updateAddToCartButton(formationId, data.in_cart);
-            })
-            .catch(error => console.error('Erreur lors de la vérification du panier:', error));
-        }
-        
-        // Vérifier chaque formation
-        formationCards.forEach(card => {
-            let formationId;
-            
-            if (card.hasAttribute('data-formation-id')) {
-                formationId = card.getAttribute('data-formation-id');
-            } else if (card.closest('[data-category-id]')) {
-                formationId = card.closest('[data-category-id]').dataset.categoryId;
-            }
-            
-            if (formationId) {
-                checkSingleFormation(formationId);
-            }
-        });
-        
-        modals.forEach(modal => {
-            const formationId = modal.id.split('-').pop();
-            if (formationId) {
-                checkSingleFormation(formationId);
-            }
-        });
     }
+    
+    // Voici la fonction modifiée qui gère l'ouverture du modal
     $(document).on('shown.bs.modal', '.modal', function() {
         const formationId = this.id.split('-').pop();
         if (formationId) {
-            // Vérifier si cette formation est dans le panier quand le modal s'ouvre
-            fetch(`/panier/check/${formationId}`, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken
+            // Vérifier d'abord dans le localStorage pour une réponse immédiate
+            const cartFormations = JSON.parse(localStorage.getItem('cartFormations') || '[]');
+            const inCart = cartFormations.includes(formationId.toString());
+            
+            // Mettre à jour immédiatement le bouton dans le modal
+            const modalButton = this.querySelector('.addcart-btn .btn[href="/panier"]');
+            if (modalButton) {
+                if (inCart) {
+                    modalButton.textContent = 'Accéder au panier';
+                    modalButton.setAttribute('data-in-cart', 'true');
+                } else {
+                    modalButton.textContent = 'Ajouter au panier';
+                    modalButton.removeAttribute('data-in-cart');
                 }
-            })
-            .then(response => response.json())
-            .then(data => {
-                updateAddToCartButton(formationId, data.in_cart);
-            })
-            .catch(error => console.error('Erreur lors de la vérification du panier:', error));
+            }
+            
+            // Appel à la fonction générale pour mettre à jour tous les boutons liés à cette formation
+            updateAddToCartButton(formationId, inCart);
         }
     });
-    // Ajouter cette fonction au gestionnaire d'événements pour l'ouverture des modals
-$(document).on('click', '.product-hover a[data-bs-toggle="modal"]', function(e) {
-    e.preventDefault();
-    const modalId = $(this).attr('data-bs-target');
-    const formationId = modalId.split('-').pop();
     
-    // Vérifier si cette formation est dans le panier avant d'ouvrir le modal
-    fetch(`/panier/check/${formationId}`, {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'X-CSRF-TOKEN': csrfToken
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        updateAddToCartButton(formationId, data.in_cart);
-        
-        // Puis afficher le modal
-        showFormationDetails(formationId);
-    })
-    .catch(error => {
-        console.error('Erreur lors de la vérification du panier:', error);
-        // Afficher quand même le modal en cas d'erreur
-        showFormationDetails(formationId);
-    });
-});
     /**
      * Met à jour l'apparence du bouton "Ajouter au panier"
      * @param {string|number} formationId - L'ID de la formation
      * @param {boolean} inCart - Indique si la formation est dans le panier
      */
-   
     function updateAddToCartButton(formationId, inCart) {
         // Trouver tous les boutons pour cette formation (dans la liste et dans le modal)
         const buttons = document.querySelectorAll(`.addcart-btn .btn[href="/panier"]`);
@@ -392,17 +381,18 @@ $(document).on('click', '.product-hover a[data-bs-toggle="modal"]', function(e) 
         // Fonction pour mettre à jour un bouton spécifique
         function updateButton(button) {
             if (inCart) {
-                button.classList.add('btn-secondary');
-                button.classList.remove('btn-primary');
-                button.disabled = true;
-                
-                // Assurons-nous que le bouton ne déclenche plus d'événements
+                // Garder la classe btn-primary pour avoir la même couleur que "Ajouter au panier"
+                button.classList.add('btn-primary');
+                button.classList.remove('btn-secondary');
+                button.disabled = false; // Garder le bouton actif
                 button.setAttribute('data-in-cart', 'true');
+                button.textContent = 'Accéder au panier'; // Changer le texte du bouton
             } else {
                 button.classList.add('btn-primary');
                 button.classList.remove('btn-secondary');
                 button.disabled = false;
                 button.removeAttribute('data-in-cart');
+                button.textContent = 'Ajouter au panier'; // Réinitialiser le texte du bouton
             }
         }
         
@@ -488,4 +478,89 @@ $(document).on('click', '.product-hover a[data-bs-toggle="modal"]', function(e) 
             alert(message);
         }
     }
-});
+    
+    // Fonction pour afficher les détails d'une formation dans un modal
+    // window.showFormationDetails = function(formationId) {
+    //     // Vérifier d'abord si cette formation est dans le panier avant d'ouvrir le modal
+    //     const cartFormations = JSON.parse(localStorage.getItem('cartFormations') || '[]');
+    //     const inCart = cartFormations.includes(formationId.toString());
+    //     console.log('showFormationDetails - formationId:', formationId, 'inCart:', inCart);
+
+        
+    //     // Rechercher le modal correspondant à la formation
+    //     const modal = $(`#formation-modal-${formationId}`);
+        
+    //     // Préparer le bouton avec le bon texte avant d'afficher le modal
+    //     if (modal.length) {
+    //         const modalButton = modal[0].querySelector('.addcart-btn .btn[href="/panier"]');
+    //         if (modalButton) {
+    //             if (inCart) {
+    //                 modalButton.textContent = 'Accéder au panier';
+    //                 modalButton.setAttribute('data-in-cart', 'true');
+    //             } else {
+    //                 modalButton.textContent = 'Ajouter au panier';
+    //                 modalButton.removeAttribute('data-in-cart');
+    //             }
+    //         }
+            
+    //         // Afficher le modal
+    //         const bsModal = new bootstrap.Modal(modal);
+    //         bsModal.show();
+    //     } else {
+    //         console.error(`Modal pour la formation #${formationId} non trouvé`);
+    //     }
+    // };
+
+    // Remplacer la fonction showFormationDetails dans cart.js
+window.showFormationDetails = function(formationId) {
+    // Vérifier d'abord si cette formation est dans le panier
+    const cartFormations = JSON.parse(localStorage.getItem('cartFormations') || '[]');
+    const inCart = cartFormations.includes(formationId.toString());
+    
+    // Rechercher le modal correspondant à la formation
+    const modalElement = document.querySelector(`#formation-modal-${formationId}`);
+    
+    if (modalElement) {
+        // Mettre à jour le bouton avant d'ouvrir le modal
+        const modalButton = modalElement.querySelector('.addcart-btn .btn[href="/panier"]');
+        if (modalButton) {
+            if (inCart) {
+                modalButton.textContent = 'Accéder au panier';
+                modalButton.setAttribute('data-in-cart', 'true');
+            } else {
+                modalButton.textContent = 'Ajouter au panier';
+                modalButton.removeAttribute('data-in-cart');
+            }
+        }
+        
+        // Utiliser une référence existante au modal s'il est déjà initialisé
+        let bsModal = modalElement.bsModal;
+        if (!bsModal) {
+            bsModal = new bootstrap.Modal(modalElement);
+            modalElement.bsModal = bsModal; // Stocker la référence pour réutilisation
+        }
+        
+        bsModal.show();
+    } else {
+        console.error(`Modal pour la formation #${formationId} non trouvé`);
+    }
+};
+    // Handler pour le clic sur l'icône "œil" - modifié pour mettre à jour le bouton avant l'ouverture du modal
+    $(document).on('click', '.product-hover a[data-bs-toggle="modal"]', function(e) {
+        e.preventDefault();
+        const modalId = $(this).attr('data-bs-target');
+        const formationId = modalId.split('-').pop();
+        console.log('Clic sur œil - formationId:', formationId);
+
+        
+        // Vérifier si cette formation est dans le panier avant d'ouvrir le modal
+        const cartFormations = JSON.parse(localStorage.getItem('cartFormations') || '[]');
+        const inCart = cartFormations.includes(formationId.toString());
+        
+        // Mise à jour préalable des boutons avant l'ouverture du modal
+        updateAddToCartButton(formationId, inCart);
+        
+        // Puis afficher le modal avec l'état déjà correct
+        window.showFormationDetails(formationId);
+    });
+}); 

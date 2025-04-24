@@ -48,6 +48,7 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script src="<?php echo e(asset('assets/js/MonJs/formations-modal.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/MonJs/cart.js')); ?>"></script>

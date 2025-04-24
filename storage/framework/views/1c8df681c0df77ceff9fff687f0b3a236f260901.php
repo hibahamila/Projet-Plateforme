@@ -7,7 +7,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/select2.css')); ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/owlcarousel.css')); ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/range-slider.css')); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/formations-modal.css')); ?>">
 <style>
     .hover-effect:hover {
     transform: translateY(-2px);
@@ -197,6 +196,8 @@
 </div>
 
 	<?php $__env->startPush('scripts'); ?>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 	<script src="<?php echo e(asset('assets/js/range-slider/ion.rangeSlider.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/range-slider/rangeslider-script.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/touchspin/vendors.min.js')); ?>"></script>

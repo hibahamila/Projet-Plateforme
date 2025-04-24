@@ -392,5 +392,20 @@ class PanierController extends Controller
         ]);
     }
 
+    public function getCartItems()
+{
+    if (!Auth::check()) {
+        return response()->json(['items' => []]);
+    }
     
+    $userId = Auth::id();
+    $cart = Cart::where('user_id', $userId)->first();
+    
+    $items = [];
+    if ($cart && is_array($cart->training_ids)) {
+        $items = $cart->training_ids;
+    }
+    
+    return response()->json(['items' => $items]);
+}
 }
