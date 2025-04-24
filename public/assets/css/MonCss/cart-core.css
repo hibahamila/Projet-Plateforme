@@ -1,0 +1,19 @@
+.cart-badge {
+    position: absolute;
+    top: -8px;          /* Modifié: position plus haute */
+    right: -12px;       /* Modifié: position plus à droite */
+    background-color: #3b7af5; /* Modifié: bleu plus vif comme dans l'image 2 */
+    color: white;
+    border-radius: 50%;
+    min-width: 20px;    /* Modifié: badge plus grand */
+    height: 20px;       /* Modifié: badge plus grand */
+    padding: 0 5px;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    pointer-events: none;
+}

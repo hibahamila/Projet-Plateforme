@@ -1,0 +1,210 @@
+/* Styles pour le datepicker personnalisé */
+/* .custom-calendar-container {
+    position: absolute;
+    z-index: 1000;
+    width: 300px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    font-family: 'Inter', Arial, sans-serif;
+    padding: 15px;
+} */
+.custom-calendar-container {
+    position: absolute;
+    z-index: 1000;
+    width: 300px; /* Increased from 250px */
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    font-family: 'Inter', Arial, sans-serif;
+    padding: 15px;
+    /* Ensure calendar doesn't get cut off */
+    overflow: visible;
+    /* If calendar opens near the bottom of screen, position it above the input */
+    top: auto;
+    transform: translateY(0);
+    max-height: none;
+}
+.custom-calendar-wrapper {
+    width: 100%;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.month-year {
+    font-size: 18px;
+    color: #4481dd;
+    flex-grow: 1;
+    text-align: center;
+    font-weight: 500;
+}
+
+.calendar-nav-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    border: none;
+    background-color: #4481dd;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.calendar-nav-btn:hover {
+    background-color: #3671c7;
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.weekday {
+    padding: 8px 0;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+}
+
+.day:not(.disabled):hover {
+    background-color: #f0f4fe;
+}
+
+.day.disabled {
+    color: #cccccc;
+    cursor: default;
+}
+
+
+.datepicker {
+    cursor: pointer;
+    background-color: transparent !important;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Modifier le style du jour actuel */
+.day.today {
+    color: #000000; /* Texte en noir au lieu de bleu */
+    font-weight: 600;
+    border: 2px solid #4481dd; /* Ajouter une bordure bleue */
+    border-radius: 4px;
+}
+
+/* Si vous voulez que la date sélectionnée reste avec le fond bleu */
+.day.selected {
+    background-color: #4481dd;
+    color: white;
+    font-weight: 500;
+}
+
+/* Si le jour actuel est aussi sélectionné, priorité au style sélectionné */
+.day.today.selected {
+    border: none;
+}
+.datepicker:focus {
+    outline: none;
+    border-color: #4481dd;
+    box-shadow: 0 0 0 2px rgba(68, 129, 221, 0.1);
+}.datepicker {
+    cursor: pointer;
+    background-color: transparent !important;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+.datepicker:focus {
+    outline: none;
+    border-color: #4481dd;
+    box-shadow: 0 0 0 2px rgba(68, 129, 221, 0.1);
+}
+.calendar-nav-btn:focus {
+    outline: none;
+}
+
+.day.prev-month, .day.next-month {
+    color: #cccccc;
+    cursor: pointer;
+}
+
+.day.prev-month:hover, .day.next-month:hover {
+    background-color: #f0f4fe;
+    color: #888888;
+}
+
+/* Assurez-vous que le conteneur principal est bien positionné */
+.custom-calendar-container {
+    position: absolute;
+    z-index: 1000;
+    width: 300px; /* Augmenté */
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    font-family: 'Inter', Arial, sans-serif;
+    padding: 15px;
+    height: auto; /* Important: permet au conteneur de s'adapter à son contenu */
+    overflow: visible;
+    /* Position avec marge pour éviter les coupures */
+    margin-top: 5px;
+}
+
+/* Assurer que les lignes de la grille sont correctement dimensionnées */
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    /* Définir une hauteur minimale pour chaque ligne */
+    grid-auto-rows: minmax(32px, auto);
+    /* Assurer que toutes les lignes sont visibles */
+    margin-bottom: 10px;
+}
+
+/* Assurez-vous que les jours sont bien visibles */
+.day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    width: 32px; /* Assurez-vous que la largeur est définie */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+    margin: 2px auto; /* Centrer les jours dans leurs cellules */
+}

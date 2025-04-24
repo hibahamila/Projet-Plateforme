@@ -1,0 +1,97 @@
+
+.dropzone-container {
+    min-height: 200px; /* Augmenter la hauteur minimale */
+    border: 2px dashed #131414;
+    border-radius: 5px;
+    background: #f8fafc;
+    padding: 30px; /* Augmenter le padding */
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%; /* Prendre toute la largeur disponible */
+}
+
+.dropzone-container:hover {
+    border-color: #101010;
+    /* background: #f1f7ff; */
+}
+
+.dropzone-container .dz-message {
+    margin: 0;
+}
+
+.dropzone-container .dz-message i {
+    font-size: 40px; /* Agrandir l'icône */
+    color: #131314;
+    margin-bottom: 20px; /* Augmenter l'espacement */
+    display: block;
+}
+
+.dropzone-container .dz-message h6 {
+    margin-bottom: 15px; /* Augmenter l'espacement */
+    font-weight: 500;
+    font-size: 18px; /* Agrandir le texte */
+}
+
+.dropzone-container .dz-message .note {
+    font-size: 14px; /* Agrandir le texte */
+    color: #6c757d;
+}
+
+/* Afficher les fichiers côte à côte */
+.dropzone-container .dz-preview {
+    display: inline-block;
+    margin: 15px; /* Augmenter la marge */
+    vertical-align: top;
+    width: 120px; /* Agrandir la largeur des aperçus */
+    height: 120px; /* Agrandir la hauteur des aperçus */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative; /* Important pour le positionnement absolu de l'icône */
+}
+
+/* Masquer les liens de suppression par défaut de Dropzone */
+.dropzone-container .dz-remove {
+    display: none !important;
+}
+
+/* Style pour l'icône de suppression personnalisée */
+.dropzone-container .dz-preview .custom-remove {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    padding: 5px; /* Augmenter le padding */
+    color: #f00;
+    cursor: pointer;
+    z-index: 100;
+    font-size: 18px; /* Agrandir l'icône */
+}
+
+.dropzone-container .dz-preview .custom-remove:hover {
+    background-color: rgba(255, 255, 255, 1);
+    color: #cc0000;
+}
+
+/* Masquer le message après l'upload */
+.dropzone-container.dz-started .dz-message {
+    display: none;
+}
+
+
+
+/* Style pour le conteneur de prévisualisation */
+.btn-close-black {
+    background-color: black; /* Fond noir */
+    color: white; /* Texte blanc */
+    border: none; /* Pas de bordure */
+    padding: 5px 10px; /* Espacement interne */
+    border-radius: 4px; /* Coins arrondis */
+    cursor: pointer; /* Curseur en forme de main */
+}
+
+.btn-close-black:hover {
+    background-color: #242222; /* Fond noir plus clair au survol */
+}

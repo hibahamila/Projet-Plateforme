@@ -1,0 +1,209 @@
+/* Styles pour le modal de réservation */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #333;
+}
+
+.close-modal {
+    font-size: 24px;
+    cursor: pointer;
+    color: #777;
+}
+
+.close-modal:hover {
+    color: #333;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    border-top: 1px solid #eee;
+}
+
+.formation-item {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.formation-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.formation-price {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.discount {
+    color: #e53935;
+    font-weight: bold;
+}
+
+.final-price {
+    font-weight: bold;
+}
+
+.formation-dates {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.reservation-total {
+    text-align: right;
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.highlight {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.error-message {
+    color: #e53935;
+    text-align: center;
+    font-weight: bold;
+}
+
+.modal-spinner {
+    margin: 0 auto;
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+}
+
+#reservation-loading {
+    text-align: center;
+    padding: 30px 0;
+}
+
+#reservation-id-container {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #3e8e41;
+}
+
+.btn-secondary {
+    background-color: #f1f1f1;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+    background-color: #ddd;
+}
+
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(0,0,0,0.1);
+    border-radius: 50%;
+    border-top-color: #4CAF50;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Styles pour les toasts */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 4px;
+    color: white;
+    z-index: 10000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.toast-success {
+    background-color: #4CAF50;
+}
+
+.toast-error {
+    background-color: #e53935;
+}
+
+.toast-warning {
+    background-color: #FF9800;
+}
+
+.toast-info {
+    background-color: #2196F3;
+}

@@ -1,0 +1,278 @@
+.categories-filter {
+    width: 100%;
+    overflow: hidden;
+    margin: 20px 0;
+    position: relative;
+    background-color: #f5f7fa;
+    padding: 15px 0;
+}
+
+.categories-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.categories-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    gap: 10px;
+    padding: 10px 0;
+    width: calc(100% - 50px);
+    margin: 0;
+    padding-right: 15px;
+}
+
+.categories-slider::-webkit-scrollbar {
+    display: none;
+}
+
+/* Style de base pour les items de catégorie */
+.category-item {
+    flex: 0 0 auto;
+    background-color: #e9e9ef; /* Gris très clair par défaut, comme l'image 2 */
+    border-radius: 30px;
+    padding: 8px 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Hover pour catégorie non sélectionnée */
+.category-item:hover:not(.active) {
+    background-color: #d8d8df; /* Gris légèrement plus foncé au survol */
+}
+
+.category-link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: #333;
+    font-weight: 700;
+    align-items: center;
+    text-align: center;
+    min-width: 100px;
+}
+
+
+/* Style du lien pour catégorie sélectionnée */
+.category-item.active .category-link {
+    color: #fff; /* Texte blanc pour catégorie active */
+}
+
+.category-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 2px;
+
+}
+
+/* Style du nombre de participants pour catégorie non sélectionnée */
+.participant-count {
+    font-size: 12px;
+    color: #6a6f73;
+    display: block;
+}
+
+/* Style du nombre de participants pour catégorie sélectionnée */
+.category-item.active .participant-count {
+    color: rgba(255, 255, 255, 0.7); /* Blanc légèrement transparent */
+}
+
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.next-button {
+    right: 5px;
+}
+
+.prev-button {
+    left: 5px;
+}
+
+.nav-button:hover {
+    background-color: #f5f5f5;
+}
+
+/* Media Query pour les écrans moyens */
+@media (min-width: 768px) {
+    .category-item {
+        min-width: 180px;
+        padding: 12px 20px;
+        border-radius: 50px;
+    }
+    
+    .category-title {
+        font-size: 16px;
+    }
+    
+    .participant-count {
+        font-size: 13px;
+    }
+}
+
+/* Media Query pour les grands écrans */
+@media (min-width: 1200px) {
+    .categories-slider {
+        width: calc(100% - 60px);
+        padding-right: 20px;
+    }
+    
+    .next-button {
+        right: 10px;
+    }
+    
+    .prev-button {
+        left: 10px;
+    }
+}
+
+/* Pour les très grands écrans */
+@media (min-width: 1600px) {
+    .categories-filter {
+        padding: 20px 0;
+    }
+    
+    .categories-wrapper {
+        padding: 0;
+    }
+    
+    .categories-slider {
+        gap: 15px;
+    }
+}
+
+/* Style pour le hover du texte du lien */
+.category-link:hover {
+    color: #333; /* Maintenir la même couleur qu'à l'état normal */
+}
+
+/* Style pour le hover du texte du lien actif */
+.category-item.active .category-link:hover {
+    color: #fff; /* Maintenir le blanc pour la catégorie active */
+}
+
+
+.category-item.active {
+    background-color: #5c5d75; /* Couleur gris-bleu comme sur l'image 1 (Machine Learning) */
+}
+
+/* Style pour catégorie active lors du clic (état focus/active) */
+.category-item.active:active {
+    background-color: #2d2e3d; /* Version plus foncée pour le clic comme sur l'image 2 (Python) */
+}
+
+/* Style pour le hover de la catégorie active */
+.category-item.active:hover {
+    background-color: #4d4e63; /* Une teinte intermédiaire pour le hover */
+}
+
+
+
+.categories-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+/* Dropdown toggle button */
+.dropdown-toggle {
+    background-color: #f0f0f4;
+    color: #444;
+    padding: 12px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 150px;
+}
+
+.dropdown-toggle .fa-chevron-down {
+    margin-left: 10px;
+    transition: transform 0.3s;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 1000;
+    border-radius: 8px;
+    margin-top: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Show the dropdown menu on hover */
+.categories-dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+    display: block;
+}
+
+.categories-dropdown:hover .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+/*zedtou tw lel dropdown/*
+
+/* Links inside the dropdown */
+.dropdown-content .category-item {
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-content .category-link {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.dropdown-content .category-link:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-content .category-item.active .category-link {
+    background-color: #6c6a8a;
+    color: white;
+}
+
+/* Dark background for category "cat" and other styling as shown in Image 1 */
+.dropdown-content .category-item:first-child .category-link {
+    background-color: #6c6a8a;
+    color: white;
+}
+
+.dropdown-content .category-item:nth-child(2) .category-link,
+.dropdown-content .category-item:nth-child(3) .category-link {
+    background-color: #f0f0f4;
+    color: #333;
+}

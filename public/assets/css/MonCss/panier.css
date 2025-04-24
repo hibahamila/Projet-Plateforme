@@ -1,0 +1,533 @@
+    :root {
+        --primary-color: #A435F0;
+        --secondary-color: #8710d8;
+        --text-color: #333;
+        --border-color: #e0e0e0;
+        --bg-light: #f9f9f9;
+        --accent-color: #5624d0;
+        --price-color: #000;
+        --discount-color: #EB1551;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text-color);
+        /* background-color: #f5f7fa; */
+        background-color: white;
+
+        margin: 0;
+        padding: 0;
+    }
+    body, .container {
+        background-color: white !important;
+      }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .panier-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 25px;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 15px;
+        gap: 20px; /* Ajoutez cette ligne pour l'espace entre h1 et .panier-count */
+
+    }
+    h1 {
+        font-size: 35px;
+        /* color: #333; */
+        color:#2C2C3A;
+        margin: 0;
+    }
+
+    /* Move the course count to appear below "Panier d'achat" */
+    .panier-count {
+        font-size: 16px;
+        font-weight: normal;
+        margin-top: 5px;
+        display: block;
+        gap: 20px; /* Ajoutez cette ligne pour l'espace entre h1 et .panier-count */
+
+    }
+
+    .panier-content {
+        display: flex;
+        gap: 30px;
+    }
+
+    .formations-list {
+        flex: 3;
+        background-color: white;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .formation-image {
+        width: 120px;
+        height: 80px;
+        overflow: hidden;
+        border-radius: 4px;
+        margin-right: 20px;
+        flex-shrink: 0;
+    }
+
+    .formation-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .placeholder-image {
+        width: 100%;
+        height: 100%;
+        background-color: #eee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        color: #777;
+    }
+
+    .formation-details {
+        flex: 1;
+        padding-right: 15px;
+    }
+
+    .formation-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 0 5px 0;
+        color: #333;
+        text-transform: bol;
+    }
+
+    .formation-instructor {
+        font-size: 14px;
+        color: #666;
+        margin: 0 0 5px 0;
+    }
+
+    .formation-badge {
+        margin: 5px 0;
+    }
+
+    .badge {
+        display: inline-block;
+        background-color: #f0f0f0;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-size: 12px;
+        color: #555;
+    }
+
+    .formation-meta {
+        display: flex;
+        align-items: center;
+        margin-top: 8px;
+        font-size: 13px;
+        color: #666;
+    }
+
+    .formation-meta i {
+        margin-right: 5px;
+    }
+
+    .dot-separator {
+        margin: 0 8px;
+        font-size: 8px;
+    }
+    .formation-rating {
+        display: flex;
+        align-items: center;
+        margin-top: 8px;
+    }
+
+    .rating-value {
+        color: #8b3e00; /* Change from #b4690e to a more orange/gold color */
+        font-weight: 600;
+        margin-right: 5px;
+        font-size: 14px;
+        order: -1; /* Place la valeur numérique en premier */
+    }
+
+    .rating-stars {
+        color: #cd7b10  ; /* Change from #FFA534 to match the rating value color */
+        display: flex;
+        align-items: center;
+    }
+
+    .rating-stars i {
+        margin-right: 2px;
+        font-size: 10px;
+    }
+
+    .rating-count {
+        font-size: 13px;
+        color: #6a6f73;
+        margin-left: 5px;
+    }
+
+
+    .formation-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-width: 220px;
+    }
+
+   
+
+    .remove-link:hover {
+        background-color: #f0e6ff; /* Fond légèrement violet au survol */
+    }
+    .formation-price {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    .final-price {
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--price-color);
+        text-align: right;
+        width: 100%;
+    }
+    /* Pour afficher le prix barré et la remise sur la même ligne */
+    .discount-row {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    .formation-item {
+        display: flex;
+        border-bottom: 1px solid var(--border-color);
+        padding: 20px;
+        background-color: white;
+        justify-content: space-between;
+    }
+
+    .action-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Aligne les éléments à gauche */
+        gap: 0px; /* Espace entre les deux liens */
+        font-family: 'Roboto', sans-serif;
+
+      }
+      
+    
+    .price-section {
+        margin-bottom: 15px;
+    }
+
+    .discount-price {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--price-color);
+    }
+
+    .discount-row {
+        margin-top: 5px;
+    }
+
+    .price-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        min-width: 120px; /* Largeur minimale pour assurer l'alignement */
+    }
+    
+    .empty-cart {
+        text-align: center;
+        padding: 60px 0;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+
+    }
+
+    .empty-cart i {
+        font-size: 70px;
+        color: #ddd;
+        margin-bottom: 20px;
+    }
+
+    .empty-cart p {
+        font-size: 20px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .empty-cart a {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: var(--primary-color);
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+    }
+
+    .empty-cart a:hover {
+        background-color: var(--secondary-color) !important;
+        color: white !important; /* Ajoutez cette ligne */
+
+    }
+
+    /* Styles pour le résumé du panier */
+    .panier-summary {
+        flex: 1;
+        min-width: 280px;
+        background-color: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        align-self: flex-start;
+    }
+
+    .summary-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #565667        ;
+        text-align: center;
+        font-weight: bold;
+
+
+    }
+
+    .total-price {
+        font-size: 25px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 5px;
+        text-align: center;
+
+    }
+    .discount-percentage {
+        font-size: 14px;
+        font-weight: 700;
+        color: #EB1551;
+        margin-bottom: 15px;
+        text-align: center;
+
+    }
+
+
+
+    .ml-2 {
+        margin-left: 8px;
+    }
+
+    .mt-2 {
+        margin-top: 8px;
+    }
+
+    .text-sm {
+        font-size: 12px;
+    }
+
+    .text-gray-600 {
+        color: #666;
+    }
+
+    /* Responsive design pour mobile */
+    @media (max-width: 768px) {
+        .panier-content {
+            flex-direction: column;
+        }
+        
+        .formation-item {
+            flex-direction: column;
+        }
+        
+        .formation-image {
+            width: 100%;
+            height: 180px;
+            margin-right: 0;
+            margin-bottom: 15px;
+        }
+        .formation-price {
+            text-align: left;
+            margin-top: 10px;
+        }
+        
+        .panier-summary {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+        
+        .action-links {
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 10px;
+        }
+    }
+
+
+
+
+/* Styles pour le badge du panier */
+.cart-badge,
+.custom-violet-badge {
+    background-color: #2B6ED4;
+    color: white; /* Couleur du texte en bleu comme demandé */
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 10px;
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    font-weight: bold;
+    display: block;
+}
+
+    /* Structure principale de la ligne de formation */
+.formation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding: 20px;
+    background-color: white;
+}
+
+/* Partie gauche avec image et détails */
+.formation-info {
+    display: flex;
+    flex: 2;
+}
+
+/* Partie droite avec actions et prix */
+.formation-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 300px; /* Pour garantir l'espace suffisant */
+}
+
+
+/* Pour la section prix */
+.formation-price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: 20px; /* Espace entre le bouton et les prix */
+    min-width: 180px; /* Largeur minimale pour les prix */
+}
+
+/* Pour les prix avec remise */
+.price-with-discount {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #767676;
+    font-size: 14px;
+    text-align: center;
+
+}
+
+.discount-badge {
+    background-color: var(--discount-color);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-left: 10px;
+    text-align: center;
+
+}
+
+.final-price, .free-price {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--price-color);
+    text-align: right;
+    width: 100%;
+}
+
+/* Prix gratuit */
+.free-price {
+    margin-right: 10px; /* Aligner avec les autres prix */
+}
+
+/* Ajout d'un conteneur pour le bouton supprimer pour un meilleur alignement */
+.remove-container {
+    width: 100px; /* Même largeur que le bouton */
+    text-align: center;
+}
+
+
+.remove-link {
+    display: inline-block;
+    color: #7F55EC; /* Couleur normale - violet */
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 5px;
+
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    text-align: right;
+    width: auto;
+    font-family: sans-serif; /* ou peut-être une police comme Roboto, Arial */
+}
+
+/* Add or modify this hover rule to maintain violet color */
+.remove-link:hover, .remove-link:focus {
+    color: #7F55EC; /* Keep the same violet color on hover */
+    background-color: #f0e6ff; /* Light violet background on hover */
+    text-decoration: none; /* Ensure no underline appears */
+}
+
+/* Ajoutez ces règles pour les états hover et focus */
+
+.reserver-button {
+    background-color: #7E22CE;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    outline: none; /* Supprime le contour lors du focus */
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.reserver-button:hover {
+    background-color: #6B21A8;
+}
+
+/* Important: Cette règle empêche l'apparition de la bordure noire au clic */
+.reserver-button:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.arrow-icon {
+    margin-left: 8px;
+    stroke: white;
+}
+

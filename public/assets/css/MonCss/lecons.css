@@ -1,0 +1,109 @@
+/* Style pour les badges de fichiers */
+.file-badge {
+    display: inline-block;
+    margin: 2px;
+    padding: 4px 8px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.file-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.file-link:hover {
+    text-decoration: underline;
+}
+
+.actions-column {
+    width: 100px;
+}
+
+/* Style pour les tooltips */
+.file-badge:hover::after {
+    content: attr(data-file-name);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+}
+
+.file-badge:hover::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% - 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333;
+    z-index: 1000;
+}
+
+/* Pour les écrans très petits */
+@media (max-width: 576px) {
+    .file-badge:hover::after {
+        white-space: normal;
+        max-width: 150px;
+        text-align: center;
+        word-break: break-all;
+    }
+}
+
+/* Style supplémentaire pour le tableau */
+#lessons-table {
+    width: 100%;
+}
+
+.files-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+/* Style pour les liens dans le tableau */
+.table-responsive a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.table-responsive a:hover {
+    text-decoration: underline;
+}
+
+/* Style pour les boutons d'action */
+.dropdown-menu .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dropdown-menu .dropdown-item i {
+    width: 18px;
+    text-align: center;
+}
+
+/* Style pour les messages d'alerte */
+.alert {
+    margin-bottom: 1rem;
+}
+
+/* Style pour le bouton d'ajout */
+.custom-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

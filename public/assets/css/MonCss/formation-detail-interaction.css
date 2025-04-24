@@ -1,0 +1,180 @@
+/* Formation Detail Panel styles */
+#formation-detail-panel {
+    position: absolute;
+    width: 400px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+    max-height: 550px;
+    overflow-y: auto;
+}
+
+#formation-detail-panel.active {
+    opacity: 1;
+    visibility: visible;
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Flèche du panneau */
+#formation-detail-panel .panel-arrow {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: -1;
+}
+
+#formation-detail-panel .panel-arrow.arrow-left {
+    left: -10px;
+    top: 70px;
+}
+
+#formation-detail-panel .panel-arrow.arrow-right {
+    right: -10px;
+    top: 70px;
+}
+
+/* Structure de base du panneau */
+#formation-detail-panel .panel-content {
+    display: flex;
+    flex-direction: column;
+}
+
+#formation-detail-panel .panel-content h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#formation-detail-panel .instructor {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Conteneur pour tout le contenu avant le bouton */
+#formation-detail-panel .content-wrapper {
+    margin-bottom: 5px;
+}
+
+/* Description et features */
+#formation-detail-panel .description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #444;
+    margin: 0;
+    padding: 0;
+}
+
+#formation-detail-panel .features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#formation-detail-panel .features li {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: flex-start;
+}
+
+#formation-detail-panel .features li:last-child {
+    margin-bottom: 0;
+}
+
+#formation-detail-panel .features li i {
+    color: #6c5ce7;
+    margin-right: 10px;
+    margin-top: 4px;
+}
+
+/* Style du bouton */
+#formation-detail-panel .btn-add-to-cart {
+    background-color: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+    transition: background-color 0.2s;
+    margin: 0;
+    outline: none; /* Ajoutez cette ligne */
+
+}
+
+#formation-detail-panel .btn-add-to-cart:hover {
+    background-color: #5b4bd8;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Styles pour le contenu riche */
+#formation-detail-panel .rich-content ul,
+#formation-detail-panel .rich-content ol {
+    margin: 0;
+    padding: 0 0 0 20px;
+}
+
+#formation-detail-panel .rich-content p {
+    margin: 0 0 5px 0;
+}
+
+#formation-detail-panel .rich-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Règle critique pour éliminer tous les espacements indésirables */
+#formation-detail-panel .description.rich-content > *:last-child,
+#formation-detail-panel .features > li:last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* S'assurer que tous les éléments générés ont un espacement cohérent */
+#formation-detail-panel .rich-content h1,
+#formation-detail-panel .rich-content h2,
+#formation-detail-panel .rich-content h3,
+#formation-detail-panel .rich-content h4,
+#formation-detail-panel .rich-content h5,
+#formation-detail-panel .rich-content h6 {
+    margin: 0 0 5px 0;
+}
+
+#formation-detail-panel .rich-content *:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Élimination des marges par défaut du navigateur */
+#formation-detail-panel .panel-content > *:last-child {
+    margin-bottom: 0;
+}
+
+.formation-meta-info {
+    font-size: 14px;
+    color: #6a6f73;
+    font-weight: 400;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    /* border-bottom: 1px solid #e8e9eb; */
+}

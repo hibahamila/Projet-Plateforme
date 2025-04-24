@@ -1,0 +1,68 @@
+
+/*pour l alerte sweatalert2 */
+
+/* Bouton de confirmation personnalisé SweetAlert */
+.swal2-confirm.custom-confirm-btn {
+    background-color: #2B6ED4 !important;
+    border-color: #2B6ED4 !important;
+    color: white !important;
+    box-shadow: none !important; /* Supprime l'effet de focus */
+}
+
+/* Styles pour la réussite de SweetAlert */
+.swal2-success {
+    border-color: #2B6ED4 !important;
+}
+
+.swal2-success-ring {
+    border-color: rgba(43, 110, 212) !important;
+}
+
+.swal2-success-line-tip,
+.swal2-success-line-long {
+    background-color: #2B6ED4 !important;
+}
+
+/* Styles au survol, focus et activation du bouton personnalisé */
+.swal2-confirm.custom-confirm-btn:hover,
+.swal2-confirm.custom-confirm-btn:focus,
+.swal2-confirm.custom-confirm-btn:active {
+    background-color: #2B6ED4 !important;
+    border-color: #2B6ED4 !important;
+    color: white !important;
+    box-shadow: none !important;
+}
+
+/* Forcer la bordure à être bleue lors du focus */
+.swal2-confirm.custom-confirm-btn:focus {
+    border-color: #2B6ED4 !important;
+    outline: none !important; /* Retirer l'effet de bordure par défaut du focus */
+}
+.swal2-close {
+    color: red; /* Couleur de la croix en rouge */
+    font-size: 40px; /* Taille de la croix */
+    background-color: transparent; /* Aucune couleur de fond */
+    border: none; /* Aucune bordure */
+    position: absolute; /* Permet de positionner la croix de manière absolue */
+    top: 10px; /* Distance par rapport au haut de l'alerte */
+    right: 10px; /* Distance par rapport à la droite de l'alerte */
+    cursor: pointer; /* Change le curseur en pointeur */
+    outline: none; /* Supprime le contour autour de la croix */
+}
+
+/* Optionnel : ajouter un style au survol */
+.swal2-close:hover {
+    color: red; /* Garder la couleur rouge au survol */
+    background-color: transparent; /* Assurer qu'il n'y a pas de fond au survol */
+}
+
+/* Supprimer les effets de bordure au clic */
+.swal2-close:focus {
+    outline: none; /* Enlever l'effet de focus (bordure noire ou bleue) */
+    box-shadow: none; /* Supprimer l'ombre au focus */
+}
+
+
+
+
+

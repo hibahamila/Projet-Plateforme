@@ -1,0 +1,86 @@
+/* Préserver le style des badges de catégorie */
+.category-item {
+    position: relative;
+    /* Conserver les autres styles originaux */
+}
+
+.category-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* Conserver les autres styles originaux */
+}
+
+/* Style pour le wrapper du dropdown */
+.dropdown-wrapper {
+    position: absolute;
+    right: 10px; /* Position à droite du badge */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+/* Style pour le bouton de toggle du dropdown */
+.dropdown-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #6c757d;
+}
+
+.dropdown-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Style pour le menu dropdown */
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    min-width: 120px;
+    z-index: 1000;
+    display: none;
+    margin-top: 8px;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Style pour les éléments du dropdown */
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-item i {
+    margin-right: 8px;
+}
+
+/* Style pour l'élément de suppression */
+.dropdown-item.delete-item {
+    color: #dc3545;
+}
+
+/* Effet de séparation entre les éléments */
+.dropdown-item:not(:last-child) {
+    border-bottom: 1px solid #eee;
+}

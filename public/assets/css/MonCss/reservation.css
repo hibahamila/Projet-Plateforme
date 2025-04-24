@@ -1,0 +1,49 @@
+/* Styles pour les boutons de réservation */
+.reserver-button {
+    background-color: #8E44AD;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-family: inherit;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.reserver-button:hover {
+    background-color: #6B21A8;
+}
+
+/* Styles pour le bouton d'annulation */
+.annuler-button {
+    background-color: #ffffff;
+    color: #8E44AD;
+    border: 2px solid #6B21A8;
+    outline: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-family: inherit;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.annuler-button:hover {
+    background-color: #efe4ff  ;
+    color: #6B21A8;
+}
+
+/* Style pour l'icône de flèche */
+.arrow-icon {
+    vertical-align: middle;
+    margin-left: 5px;
+}

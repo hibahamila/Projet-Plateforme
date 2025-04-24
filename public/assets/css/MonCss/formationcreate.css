@@ -1,0 +1,79 @@
+.image-preview-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centrer verticalement */
+    margin: 15px auto; /* Centrer horizontalement */
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    max-width: 500px;
+    width: 100%; /* Assurez-vous que le conteneur prend toute la largeur disponible */
+}
+.image-preview {
+    max-width: 100%;
+    height: auto;
+    width: 400px;
+    margin-bottom: 15px;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: block; /* Assurez-vous que l'image est un bloc */
+    margin-left: auto; /* Centrer l'image horizontalement */
+    margin-right: auto; /* Centrer l'image horizontalement */
+}
+.image-preview-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+.trash-icon {
+    color: #dc3545; /* Couleur rouge pour l'icône */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: transparent; /* Fond transparent */
+    border: none; /* Supprimer la bordure */
+    padding: 0; /* Supprimer le padding */
+}
+.trash-icon:hover {
+    transform: scale(1.1);
+}
+.btn-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: transparent; /* Fond transparent pour le conteneur du bouton */
+    border: none; /* Supprimer la bordure */
+    padding: 0; /* Supprimer le padding */
+}
+.hidden {
+    display: none;
+}
+/* Centrer le conteneur de prévisualisation d'image */
+.center-container {
+    display: flex;
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+    width: 100%;
+}
+/* Positionnement du bouton switch en haut à droite */
+.switch-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+* Style pour le bouton switch */
+.form-switch .form-check-input {
+width: 3em; /* Largeur du bouton switch */
+height: 1.5em; /* Hauteur du bouton switch */
+margin-left: 0; /* Alignement du bouton switch */
+}
+
+.form-switch .form-check-label {
+margin-left: 10px; /* Espace entre le bouton switch et le label */
+}

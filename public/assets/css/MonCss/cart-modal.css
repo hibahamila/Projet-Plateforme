@@ -1,0 +1,544 @@
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 0;
+    width: 95%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* En-tête du modal */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+    font-weight: 500;
+}
+
+.close-modal {
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.close-modal:hover {
+    color: #333;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+/* Format de la carte dans le panier */
+.formation-details {
+    display: flex;
+    margin-bottom: 20px;
+    position: relative;
+    gap: 15px;
+}
+
+.formation-image-container {
+    flex: 0 0 auto;
+    width: 175px;
+}
+
+.formation-image {
+    width: 100%;
+    height: 100px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.formation-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: 0;
+    padding-right: 70px;
+}
+
+.formation-title {
+    margin: 0 0 3px 0;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #1c1d1f;
+}
+
+.formation-instructor {
+    margin: 0 0 3px 0;
+    color: #555;
+    font-size: 12px;
+}
+
+.formation-rating {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.rating-value {
+    margin-right: 7px;
+    font-size: 14px;
+    color:  #8b3e00;;
+    margin-left: 10px;
+}
+
+.rating-stars {
+    color:  #cd7b10  ;
+    margin-right: 5px;
+    font-size: 10px;
+}
+
+.rating-count {
+    color: #777;
+    font-size: 12px;
+}
+
+.formation-price {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.final-price {
+    color: #1c1d1f;
+    font-weight: 700;
+    display: block;
+}
+
+.discount-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 3px;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #6a6f73;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.discount-percentage {
+    color: #a10000;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.badge-container {
+    margin-top: 5px;
+}
+
+.badge-bestseller {
+    background-color: #f1c40f;
+    color: #333;
+    padding: 3px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Boutons d'action */
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.btn-pay,
+.btn-view-cart {
+    padding: 12px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    flex: 1;
+    outline: none !important;
+    box-shadow: none !important;
+   
+}
+
+.btn-pay {
+    background-color: white;
+    color: #a435f0;
+    border: 1px solid #a435f0;
+    padding: 12px 0;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, color 0.2s;
+    flex: 1;
+}
+
+.btn-pay:hover,
+.btn-pay:active,
+.btn-pay:focus {
+    background-color: #f7f1fe;
+    color: #a435f0;
+}
+
+.btn-view-cart {
+    background-color: #7956ec;
+    color: white;
+   
+}
+
+
+.btn-view-cart:hover {
+    background-color: #6845d3;
+    color: white !important; /* Force le texte à rester blanc */
+    text-decoration: none !important; /* Supprime le soulignement si présent */
+}
+
+.btn-pay i,
+.btn-view-cart i {
+    margin-left: 8px;
+}
+
+/* Section des formations reliées */
+.related-formations h3 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    color: #1c1d1f;
+    font-weight: 700;
+}
+
+.related-formations-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.related-formation-card {
+    display: flex;
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.related-formation-image {
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
+}
+
+.related-formation-info {
+    flex: 1;
+    padding: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.related-formation-title {
+    margin: 0 0 5px 0;
+    font-size: 14px;
+    font-weight: 600;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    padding-right: 65px;
+    color: #1c1d1f;
+}
+
+.related-formation-instructor {
+    font-size: 12px;
+    color: #6a6f73;
+    margin-bottom: 5px;
+}
+
+.related-formation-rating {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.related-formation-price {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: right;
+}
+
+.add-related-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #a435f0;
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.add-related-btn:hover {
+    background-color: #8710d8;
+}
+
+.badge-bestseller-small {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: #f1c40f;
+    color: #333;
+    padding: 2px 5px;
+    border-radius: 2px;
+    font-size: 10px;
+    font-weight: 600;
+    z-index: 1;
+}
+#confirmation-toast .toast-timeline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background-color: #ffffff !important; /* Force la couleur blanche */
+    width: 0%;
+    transition: width 3s linear;
+    z-index: 10; /* Assurez-vous qu'il est au-dessus des autres éléments */
+}
+/* Toast de confirmation */
+/* #confirmation-toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 1100;
+    animation: toastIn 0.3s, toastOut 0.3s 2.7s;
+    animation-fill-mode: forwards;
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+}
+
+.toast-content i {
+    margin-right: 10px;
+    font-size: 18px;
+} */
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes toastOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Ajustements pour les écrans plus grands */
+@media (min-width: 768px) {
+    .related-formations-container {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+/*zedtou tww */
+
+/* Ajouter ce CSS dans votre fichier de style */
+.btn-add-to-cart, .btn-view-cart, .btn-loading {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    width: 100%;
+    font-size: 14px;
+   
+}
+
+.btn-add-to-cart.purple-btn {
+    background-color: #6c5ce7; /* Couleur violet */
+    color: white;
+    box-shadow: 0 2px 5px rgba(108, 92, 231, 0.3);
+}
+
+.btn-add-to-cart.purple-btn:hover {
+    background-color: #5b4ccc;
+    box-shadow: 0 4px 8px rgba(108, 92, 231, 0.4);
+}
+
+
+
+.btn-loading {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    cursor: wait;
+}
+
+.btn-loading i {
+    margin-right: 5px;
+}
+
+.btn-add-to-cart i, .btn-view-cart i {
+    margin-right: 8px;
+}
+
+
+.cart-badge.visible {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+
+/* Modification du conteneur d'informations de formation */
+.formation-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: 0;
+    padding-right: 90px; /* Augmenter l'espace pour le prix */
+}
+
+/* Modification du titre pour gérer le débordement */
+.formation-title {
+    margin: 0 0 3px 0;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #1c1d1f;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limiter à 2 lignes */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-width: 100%; /* S'assurer qu'il ne dépasse pas */
+}
+
+/* Ajustement de la position du prix */
+.formation-price {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+    font-weight: 700;
+    font-size: 14px;
+    width: 85px; /* Définir une largeur fixe */
+}
+
+/* Ajustement des éléments de remise */
+.discount-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 3px;
+    width: 100%; /* Utiliser toute la largeur disponible */
+}
+
+/* Amélioration de l'affichage des étiquettes de remise pour éviter les débordements */
+.original-price, .discount-percentage {
+    font-size: 12px; /* Réduire légèrement la taille */
+    white-space: nowrap; /* Empêcher le retour à la ligne */
+}
+
+/* Amélioration responsive pour les petits écrans */
+@media (max-width: 576px) {
+    .formation-details {
+        flex-direction: column;
+    }
+    
+    .formation-image-container {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .formation-info {
+        padding-right: 0;
+    }
+    
+    .formation-price {
+        position: static;
+        margin-top: 10px;
+        text-align: left;
+    }
+    
+    .discount-info {
+        align-items: flex-start;
+    }
+}

@@ -1,0 +1,146 @@
+
+/* Styles pour le datepicker personnalisé */
+.custom-calendar-container {
+    position: absolute;
+    z-index: 1000;
+    width: 280px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    font-family: 'Inter', Arial, sans-serif;
+    padding: 15px;
+}
+
+.custom-calendar-wrapper {
+    width: 100%;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.month-year {
+    font-size: 18px;
+    color: #4481dd;
+    flex-grow: 1;
+    text-align: center;
+    font-weight: 500;
+}
+
+.calendar-nav-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    border: none;
+    background-color: #4481dd;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.calendar-nav-btn:hover {
+    background-color: #3671c7;
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.weekday {
+    padding: 8px 0;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+}
+
+.day:not(.disabled):hover {
+    background-color: #f0f4fe;
+}
+
+.day.disabled {
+    color: #cccccc;
+    cursor: default;
+}
+
+.datepicker {
+    cursor: pointer;
+    background-color: transparent !important;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Modifier le style du jour actuel */
+.day.today {
+    color: #000000; /* Texte en noir au lieu de bleu */
+    font-weight: 600;
+    border: 2px solid #4481dd; /* Ajouter une bordure bleue */
+    border-radius: 4px;
+}
+
+/* Si vous voulez que la date sélectionnée reste avec le fond bleu */
+.day.selected {
+    background-color: #4481dd;
+    color: white;
+    font-weight: 500;
+}
+
+/* Si le jour actuel est aussi sélectionné, priorité au style sélectionné */
+.day.today.selected {
+    border: none;
+}
+
+.datepicker:focus {
+    outline: none;
+    border-color: #4481dd;
+    box-shadow: 0 0 0 2px rgba(68, 129, 221, 0.1);
+}
+
+.calendar-nav-btn:focus {
+    outline: none;
+}
+
+/* Style pour la disposition des inputs de date */
+.date-input-group {
+    display: flex;
+    gap: 15px;
+}
+
+.date-input-container {
+    flex: 1;
+}
+
+@media (max-width: 767px) {
+    .date-input-group {
+        flex-direction: column;
+    }
+}

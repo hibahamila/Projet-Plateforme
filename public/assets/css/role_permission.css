@@ -1,0 +1,50 @@
+/* Styles essentiels pour la liste de tâches */
+.task-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ADD8E633;
+    transition: all 0.3s ease;
+}
+/*style de texte de permision et roles*/
+.task-label {
+    display: block;
+    font-size: 14px;
+    color: #999;  /* Texte gris par défaut */
+    word-break: break-all;
+    padding-top: 5px;
+    margin: 0;
+}
+
+/* Effet de survol */
+.task-container:hover .task-label {
+    color: #2c323f;  /* Texte noir au survol */
+}
+
+/* Style pour le bouton de suppression */
+.action-box.large {
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #dc3545;
+    display: inline-block;
+    text-align: center;
+}
+
+.action-box.large:hover {
+    color: #c82333;
+}
+
+/* Style de base pour la liste */
+.todo-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.todo-list-body {
+    max-height: 500px;
+    overflow: auto;
+}

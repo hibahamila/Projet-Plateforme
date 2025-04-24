@@ -1,0 +1,25 @@
+.custom-delete-btn {
+    background-color: #dc3545; /* Rouge Bootstrap */
+    border: 2px solid #a71d2a; /* Bordure rouge foncé */
+    color: white; /* Texte blanc */
+    display: inline-flex; /* Alignement horizontal */
+    align-items: center; /* Centrer le texte et l'icône */
+    gap: 5px; /* Espacement entre l'icône et le texte */
+    padding: 5px 10px; /* Ajustement du padding */
+    border-radius: 6px; /* Coins arrondis */
+    font-size: 14px; /* Taille du texte */
+    cursor: pointer; /* Curseur interactif */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Effet au survol */
+.custom-delete-btn:hover {
+    background-color: #a71d2a; /* Rouge plus foncé */
+    border-color: #780c1b;
+    transform: scale(1.05); /* Effet zoom */
+}
+
+/* Effet au clic */
+.custom-delete-btn:active {
+    transform: scale(0.95);
+}

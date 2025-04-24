@@ -1,0 +1,98 @@
+/* Style général des liens */
+a {
+    color: #2B6ED4; /* Bleu */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #1A4D8B; /* Bleu foncé au survol */
+    text-decoration: underline;
+}
+
+/* Style pour les liens dans les cellules du tableau */
+td a {
+    color: #2B6ED4; /* Bleu */
+    text-decoration: none;
+}
+
+td a:hover {
+    color: #1A4D8B; /* Bleu foncé au survol */
+    text-decoration: underline;
+}
+
+
+
+
+
+
+/* Style du bouton à trois points (avec la flèche) */
+.dropdown-toggle.no-caret {
+    background-color: transparent;
+    border: none;
+    color: #2B6ED4; /* Bleu par défaut */
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Effet hover pour le bouton */
+.dropdown-toggle.no-caret:hover {
+    background-color: #f0f0f0;
+    color: #1A4D8B; /* Bleu foncé lors du survol */
+}
+
+/* Garde le bouton en bleu même après le clic */
+.dropdown-toggle.no-caret:focus,
+.dropdown-toggle.no-caret[aria-expanded="true"] {
+    color: #1A4D8B !important; /* Bleu foncé quand le menu est ouvert */
+}
+
+/* Réaffichage de la flèche Bootstrap */
+.dropdown-toggle.no-caret::after {
+    display: inline-block;
+}
+
+/* Style du menu déroulant */
+.dropdown-menu {
+    min-width: 150px;
+    background-color: white !important; /* Fond blanc */
+    color: black !important; /* Texte en noir */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+/* Style des éléments du menu */
+.dropdown-item {
+    padding: 0.5rem 1rem;
+    color: black !important; /* Texte en noir */
+}
+
+/* Effet hover des éléments */
+.dropdown-item:hover {
+    background-color: #2B6ED4 !important; /* Bleu lorsque la souris survole */
+    color: white !important; /* Texte en blanc lors du survol */
+}
+
+/* Style pour la colonne des trois points */
+.actions-column {
+    width: 50px;
+    text-align: center;
+}
+
+
+/* Alignement du texte et du bouton sur la même ligne */
+.d-flex {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,122 @@
+/* Style pour centrer et agrandir les images */
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.centered-image {
+    width: 400px; /* Image agrandie */
+    height:200px;
+    margin-bottom: 15px;
+    object-fit: contain;
+}
+.image-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+/* Style pour l'icône de poubelle */
+.trash-icon {
+    color: #dc3545;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.trash-icon:hover {
+    transform: scale(1.2);
+}
+/* Style pour le bouton de restauration */
+#restoreImage {
+    display: none; /* Caché par défaut */
+    width: 40%; /* Largeur automatique au lieu de 100% */
+    margin-top: 10px; /* Espacement par rapport à l'élément au-dessus */
+    background-color: #808080; /* Couleur grise */
+    color: white; /* Couleur du texte */
+    border-color: #707070; /* Couleur de la bordure */
+}
+/* Container pour le file upload et le bouton de restauration */
+.upload-container {
+    display: flex;
+    flex-direction: column;
+}
+#publishDateContainer {
+    display: none;
+}
+#priceContainer {
+    display: none;
+    align-items: center;
+}
+#discountContainer {
+    display: none;
+}
+#finalPriceContainer {
+    display: none;
+}
+.text-success {
+    color: #28a745;
+}
+.text-muted {
+    color: #6c757d;
+}
+.publication-status {
+    font-weight: bold;
+    margin-top: 5px;
+}
+.price-display {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.original-price {
+    text-decoration: line-through;
+    color: #6c757d;
+    margin-right: 10px;
+}
+.final-price {
+    color: #FF4B59;
+}
+
+
+        #publishDateContainer {
+            display: none;
+        }
+        #priceContainer {
+            display: none;
+            align-items: center;
+        }
+        #discountContainer {
+            display: none;
+        }
+        #finalPriceContainer {
+            display: none;
+        }
+        .text-success {
+            color: #28a745;
+        }
+        .text-muted {
+            color: #6c757d;
+        }
+        .publication-status {
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .price-display {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .original-price {
+            text-decoration: line-through;
+            color: #6c757d;
+            margin-right: 10px;
+        }
+        .final-price {
+            color: #0a0f0b;
+            font-weight: bold;
+        }
+        .date-input-group {
+            display: flex;
+            gap: 20px;
+        }
+        .date-input-container {
+            flex: 1;
+        }
