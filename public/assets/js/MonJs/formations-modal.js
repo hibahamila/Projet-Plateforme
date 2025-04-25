@@ -263,3 +263,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // Appliquer le layout horizontal aux boutons existants
     setTimeout(updateButtonLayout, 500);
 });
+
+
