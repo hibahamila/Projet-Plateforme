@@ -140,43 +140,7 @@ function transformReserverButton(reservationId) {
  * Annule une réservation existante
  * @param {number} reservationId - L'ID de la réservation à annuler
  */
-// function cancelReservation(reservationId) {
-//     fetch('/api/reservations/cancel', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-//             'X-Requested-With': 'XMLHttpRequest',
-//             'Accept': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             reservation_id: reservationId
-//         })
-//     })
-//     .then(handleResponse)
-//     .then(data => {
-//         if (data.success) {
-//             console.log(data.message || 'Réservation annulée avec succès');
-            
-//             // Mise à jour de la variable globale
-//             window.hasExistingReservation = false;
-            
-//             // Restaurer le bouton "Réserver" original
-//             restoreReserverButton();
-            
-//             // Supprimer le bouton "Annuler"
-//             const cancelButton = document.querySelector('.annuler-button');
-//             if (cancelButton) {
-//                 cancelButton.remove();
-//             }
-//         } else {
-//             console.error(data.message || 'Erreur lors de l\'annulation de la réservation');
-//         }
-//     })
-//     .catch(error => {
-//         console.error('Erreur lors de l\'annulation de la réservation:', error);
-//     });
-// }
+
 function cancelReservation(reservationId) {
     fetch('/api/reservations/cancel', {
         method: 'POST',

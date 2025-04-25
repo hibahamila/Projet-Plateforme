@@ -154,10 +154,11 @@
     </body>
     </html>
     @endsection
+    <script src="{{ asset('assets/js/MonJs/toast/toast.js') }}"></script>
 
     <script src="{{ asset('assets/js/MonJs/formations/panier.js') }}"></script>
     <script src="{{ asset('assets/js/MonJs/formations/reservation.js') }}"></script>
-    <script src="{{ asset('assets/js/MonJs/formations/reservation-modal.js') }}"></script>
+    <script src="{{ asset('assets/js/MonJs/formations/formations-modal.js') }}"></script>
     <script src="{{ asset('assets/js/MonJs/cart.js') }}"></script>
 
 

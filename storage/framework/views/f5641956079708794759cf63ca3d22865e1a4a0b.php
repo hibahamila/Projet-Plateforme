@@ -28,7 +28,12 @@
                             <?php endif; ?>
                         </div>
                         <div class="product-view">
-                            <p class="mb-0"><?php echo e($formation->description); ?></p>
+                            <div class="description-container">
+                                <p class="mb-0 description-text truncated" id="description-<?php echo e($formation->id); ?>"><?php echo e($formation->description); ?></p>
+                                <a href="javascript:void(0)" class="btn btn-sm btn-link text-primary show-more-btn" 
+                                   id="show-more-<?php echo e($formation->id); ?>" onclick="toggleDescription(<?php echo e($formation->id); ?>)">Voir plus</a>
+                            </div>
+                            
                             <div class="mt-3">
                                 <p><strong>Places:</strong> <?php echo e($formation->total_seats); ?></p>
                                 <p><strong>Durée:</strong> <?php echo e($formation->duration); ?></p>
@@ -51,6 +56,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script src="<?php echo e(asset('assets/js/MonJs/formations-modal.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/MonJs/toast/toast.js')); ?>"></script>
+
+<script src="<?php echo e(asset('assets/js/MonJs/formations/panier.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/MonJs/cart.js')); ?>"></script>
 
 <?php /**PATH C:\Users\hibah\PFE\PlateformeELS\resources\views/admin/apps/formation/formation-modal.blade.php ENDPATH**/ ?>

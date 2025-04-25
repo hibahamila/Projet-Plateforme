@@ -82,6 +82,18 @@ class CategorieController extends Controller
         }
     }
     
-
+    public function getCategoriesCount()
+    {
+        // Récupérer toutes les catégories avec le nombre de formations actives par catégorie
+        $categories = Category::withCount('trainings')->get()->map(function($category) {
+            return [
+                'id' => $category->id,
+                'name' => $category->title,
+                'count' => $category->trainings_count
+            ];
+        });
+    
+        return response()->json(['categories' => $categories]);
+    }
 
 }

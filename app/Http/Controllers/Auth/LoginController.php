@@ -14,6 +14,8 @@ use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
+
+    
     /*
     |--------------------------------------------------------------------------
     | Login Controller

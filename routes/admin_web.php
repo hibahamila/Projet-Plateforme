@@ -309,6 +309,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::put('/{id}', [CategorieController::class, 'update'])->name('categorieupdate'); // Mise à jour d'une catégorie
 		Route::delete('/{id}', [CategorieController::class, 'destroy'])->name('categoriedestroy');
 	});
+	Route::get('/categories/count', 'CategoryController@getCategoriesCount');
+
 
 	//zedtou lel formation
 	Route::prefix('formation')->group( function(){
@@ -323,13 +325,16 @@ Route::group(['middleware' => 'auth'], function () {
 
 	});
 
+
 	Route::get('/admin/formations/filter', 'FormationController@filter')->name('formations.filter');
 
 	Route::get('/panier', [App\Http\Controllers\PanierController::class, 'index'])->name('panier.index');
 
 	// Route::post('/panier/supprimer', 'PanierController@supprimer')->name('panier.supprimer');
-
 	Route::post('/panier/supprimer', [PanierController::class, 'supprimer'])->name('panier.supprimer');
+
+
+	// Route::post('/panier/supprimer', [PanierController::class, 'supprimer'])->name('panier.supprimer');
 	// Route::post('/panier/ajouter', [PanierController::class, 'panier.ajouter']);
 	Route::post('/panier/ajouter', [App\Http\Controllers\PanierController::class, 'ajouter'])->name('panier.ajouter');
 	Route::get('/panier/items', 'PanierController@getItems');

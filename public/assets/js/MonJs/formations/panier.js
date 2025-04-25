@@ -1,4 +1,3 @@
-
 (function() {
     // Première action: récupérer le compte du localStorage pour affichage immédiat
     var storedCount = parseInt(localStorage.getItem('cartCount') || '0');
@@ -263,12 +262,6 @@ function updateUIAfterRemoval(response) {
     }
 }
 
-
-// Simplifier la fonction refreshCartBadge
-// function refreshCartBadge() {
-//     fetchCartItemsCount();
-// }
-
 // Remplacer la fonction refreshCartBadge existante
 function refreshCartBadge() {
     fetchCartItemsCount();
@@ -428,4 +421,4 @@ window.refreshCartBadge = refreshCartBadge;
 window.fetchCartItemsCount = fetchCartItemsCount;
 window.createReserverButton = createReserverButton;
 window.checkIfInCart = checkIfInCart;
-window.updateCartCount = updateCartCount; // Exposer updateCartCount pour reservation.js
+window.updateCartCount = updateCartCount; // Exposer updateCartCount

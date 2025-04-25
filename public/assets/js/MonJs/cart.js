@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     // Récupération du token CSRF pour les requêtes AJAX
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -137,7 +136,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 this.classList.add('processing');
                 const formationId = this.getAttribute('data-formation-id');
-                
+                console.log("Formation ID à supprimer:", formationId); // Ajoutez ceci pour déboguer
+
                 if (pendingRequests[formationId]) {
                     this.classList.remove('processing');
                     return;
@@ -230,6 +230,8 @@ document.addEventListener('DOMContentLoaded', function() {
      * @param {function} callback - Fonction appelée une fois l'opération terminée
      */
     function removeFromCart(formationId, callback = null) {
+        console.log(`Tentative de suppression de la formation ${formationId}...`);
+
         fetch('/panier/supprimer', {
             method: 'POST',
             headers: {
@@ -240,6 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
             body: JSON.stringify({
                 formation_id: formationId
             })
+            
         })
         .then(response => response.json())
         .then(data => {
@@ -485,26 +488,50 @@ document.addEventListener('DOMContentLoaded', function() {
      * @param {string} message - Le message à afficher
      * @param {string} type - Le type de notification (success, error, info)
      */
-    function showNotification(message, type = 'info') {
-        // Vérifier si la fonction Toast existe (comme dans Bootstrap ou autre framework)
-        if (typeof Toast !== 'undefined') {
-            new Toast({
-                text: message,
-                type: type,
-                autoHide: true,
+    /**
+ * Affiche une notification à l'utilisateur
+ * @param {string} message - Le message à afficher
+ * @param {string} type - Le type de notification (success, error, info)
+ */
+// function showNotification(message, type = 'info') {
+//     // Utiliser notre classe ToastNotification personnalisée
+//     if (typeof toast !== 'undefined') {
+//         // Utiliser l'instance globale 'toast' de ToastNotification
+//         toast.show(message, type, {
+//             duration: 3000
+//         });
+//         return;
+//     }
+    
+//     // Fallback: alert simple (si pour une raison quelconque le toast n'est pas disponible)
+//     if (type === 'error') {
+//         alert('Erreur: ' + message);
+//     } else {
+//         alert(message);
+//     }
+// }
+function showNotification(message, type = 'info') {
+    try {
+        // Utiliser notre classe ToastNotification personnalisée si disponible
+        if (typeof toast !== 'undefined' && toast) {
+            toast.show(message, type, {
                 duration: 3000
-            }).show();
-            return;
-        }
-        
-        // Fallback: alert simple (à remplacer par une meilleure implémentation)
-        if (type === 'error') {
-            alert('Erreur: ' + message);
+            });
         } else {
-            alert(message);
+            // Fallback simple en utilisant console.log et alert
+            console.log(`${type}: ${message}`);
+            if (type === 'error') {
+                alert('Erreur: ' + message);
+            } else if (message.indexOf('supprimée') !== -1 || message.indexOf('ajoutée') !== -1) {
+                alert(message);
+            }
         }
+    } catch (error) {
+        console.error('Erreur dans showNotification:', error);
+        alert(message);
     }
-
+}
+    
     // Fonction pour afficher les détails d'une formation dans un modal
     window.showFormationDetails = function(formationId) {
         // Vérifier d'abord si cette formation est dans le panier avant d'ouvrir le modal

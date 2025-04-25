@@ -28,7 +28,12 @@
                             @endif
                         </div>
                         <div class="product-view">
-                            <p class="mb-0">{{ $formation->description }}</p>
+                            <div class="description-container">
+                                <p class="mb-0 description-text truncated" id="description-{{ $formation->id }}">{{ $formation->description }}</p>
+                                <a href="javascript:void(0)" class="btn btn-sm btn-link text-primary show-more-btn" 
+                                   id="show-more-{{ $formation->id }}" onclick="toggleDescription({{ $formation->id }})">Voir plus</a>
+                            </div>
+                            {{-- <p class="mb-0">{{ $formation->description }}</p> --}}
                             <div class="mt-3">
                                 <p><strong>Places:</strong> {{ $formation->total_seats }}</p>
                                 <p><strong>Durée:</strong> {{ $formation->duration }}</p>
@@ -51,5 +56,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script src="{{asset('assets/js/MonJs/formations-modal.js')}}"></script>
+<script src="{{ asset('assets/js/MonJs/toast/toast.js') }}"></script>
+
+<script src="{{asset('assets/js/MonJs/formations/panier.js')}}"></script>
 <script src="{{asset('assets/js/MonJs/cart.js')}}"></script>
 

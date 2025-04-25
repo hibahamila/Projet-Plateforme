@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/select2.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/owlcarousel.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/range-slider.css')}}">
+
 <style>
     .hover-effect:hover {
     transform: translateY(-2px);
@@ -96,6 +97,7 @@
 	        <div class="product-wrapper-grid">
 	            <div class="row formations-container">
                     @forelse($formations as $formation)
+
 	                <div class="col-xl-3 col-sm-6 xl-4 formation-item">
 	                    <div class="card">
 	                        <div class="product-box">
@@ -209,6 +211,8 @@
     <script src="{{asset('assets/js/tooltip-init.js')}}"></script>
     <script src="{{asset('assets/js/product-tab.js')}}"></script>
     <script src="{{asset('assets/js/MonJs/formations-modal.js')}}"></script>
+    <script src="{{ asset('assets/js/MonJs/toast/toast.js') }}"></script>
+
 
     <script src="{{asset('assets/js/MonJs/formations.js')}}"></script>
 

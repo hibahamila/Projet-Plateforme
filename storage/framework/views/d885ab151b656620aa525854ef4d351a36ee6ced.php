@@ -155,10 +155,11 @@
     </body>
     </html>
     <?php $__env->stopSection(); ?>
+    <script src="<?php echo e(asset('assets/js/MonJs/toast/toast.js')); ?>"></script>
 
     <script src="<?php echo e(asset('assets/js/MonJs/formations/panier.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/MonJs/formations/reservation.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/MonJs/formations/reservation-modal.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/MonJs/formations/formations-modal.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/MonJs/cart.js')); ?>"></script>
 
 
