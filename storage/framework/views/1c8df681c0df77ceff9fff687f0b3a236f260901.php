@@ -15,7 +15,6 @@
 }
 </style>
 
-
 <?php $__env->stopPush(); ?>
 <?php $__env->startSection('content'); ?>
 <div class="container-fluid product-wrapper">
@@ -109,16 +108,16 @@
 	                                <img class="img-fluid" src="<?php echo e(asset('storage/' . $formation->image)); ?>" alt="<?php echo e($formation->title); ?>" />
 	                                <div class="product-hover">
 	                                    <ul>
+                                            
 	                                        <li>
 	                                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#formation-modal-<?php echo e($formation->id); ?>">
                                                     <i class="icon-eye"></i>
                                                 </a>
+                                                <li>
+                                                    <a href="<?php echo e(route('panier.index')); ?>"><i class="icon-shopping-cart"></i></a>
+                                                </li>
                                                 
 	                                        </li>
-
-                                            <li>
-                                                <a href="<?php echo e(route('panier.index')); ?>"><i class="icon-shopping-cart"></i></a>
-                                            </li>
 
                                             <li>
 	                                            <a href="<?php echo e(route('formationedit', $formation->id)); ?>"><i class="icon-pencil"></i></a>

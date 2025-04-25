@@ -1,4 +1,8 @@
 
+ 
+
+
+
 <div class="modal fade" id="formation-modal-<?php echo e($formation->id); ?>">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -12,7 +16,7 @@
                         <img class="img-fluid" src="<?php echo e(asset('storage/' . $formation->image)); ?>" alt="<?php echo e($formation->title); ?>" />
                     </div>
                     <div class="product-details col-lg-6 text-start">
-                        <a href="<?php echo e(route('formationshow', $formation->id)); ?>"> 
+                        <a href="<?php echo e(route('formationshow', $formation->id)); ?>">
                             <h4><?php echo e($formation->title); ?></h4>
                         </a>
                         <div class="product-price">
@@ -28,7 +32,23 @@
                             <?php endif; ?>
                         </div>
                         <div class="product-view">
-                            <p class="mb-0"><?php echo e($formation->description); ?></p>
+                            <div class="description-container">
+                                <div class="truncated-description">
+                                    <?php
+                                        // Tronquer à environ 2 lignes, environ 100 caractères
+                                        $truncatedText = Str::limit($formation->description, 100);
+                                    ?>
+                                    <?php echo e($truncatedText); ?>
+
+                                </div>
+                                <div class="full-description" style="display: none;">
+                                    <?php echo e($formation->description); ?>
+
+                                </div>
+                                <?php if(strlen($formation->description) > 100): ?>
+                                    <button type="button" class="toggle-description btn btn-sm btn-outline-primary mt-2">Voir plus</button>
+                                <?php endif; ?>
+                            </div>
                             <div class="mt-3">
                                 <p><strong>Places:</strong> <?php echo e($formation->total_seats); ?></p>
                                 <p><strong>Durée:</strong> <?php echo e($formation->duration); ?></p>
@@ -46,11 +66,4 @@
             </div>
         </div>
     </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script src="<?php echo e(asset('assets/js/MonJs/formations-modal.js')); ?>"></script>
-<script src="<?php echo e(asset('assets/js/MonJs/cart.js')); ?>"></script>
-
-<?php /**PATH C:\Users\hibah\PFE\PlateformeELS\resources\views/admin/apps/formation/formation-modal.blade.php ENDPATH**/ ?>
+</div><?php /**PATH C:\Users\hibah\PFE\PlateformeELS\resources\views/admin/apps/formation/formation-modal.blade.php ENDPATH**/ ?>

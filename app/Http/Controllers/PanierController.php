@@ -234,23 +234,6 @@ class PanierController extends Controller
         ]);
     }
 
-    public function checkInCart($formationId)
-{
-    if (!Auth::check()) {
-        return response()->json(['in_cart' => false]);
-    }
-    
-    $userId = Auth::id();
-    $cart = Cart::where('user_id', $userId)->first();
-    
-    $inCart = false;
-    if ($cart) {
-        $trainingIds = $cart->training_ids ?: [];
-        $inCart = in_array($formationId, $trainingIds);
-    }
-              
-    return response()->json(['in_cart' => $inCart]);
-}
     public function supprimer(Request $request)
     {
         if (!Auth::check()) {
@@ -407,5 +390,45 @@ class PanierController extends Controller
     }
     
     return response()->json(['items' => $items]);
+}
+
+// public function checkInCart($formationId)
+// {
+//     if (!Auth::check()) {
+//         return response()->json(['in_cart' => false]);
+//     }
+    
+//     $userId = Auth::id();
+//     $cart = Cart::where('user_id', $userId)->first();
+    
+//     $inCart = false;
+//     if ($cart) {
+//         $trainingIds = $cart->training_ids ?: [];
+//         $inCart = in_array($formationId, $trainingIds);
+//     }
+              
+//     return response()->json(['in_cart' => $inCart]);
+// }
+public function checkInCart($formationId)
+{
+    if (!Auth::check()) {
+        return response()->json(['in_cart' => false]);
+    }
+    
+    $userId = Auth::id();
+    $cart = Cart::where('user_id', $userId)->first();
+    
+    $inCart = false;
+    if ($cart && is_array($cart->training_ids)) {
+        // Log for debugging
+        Log::debug("Checking if formation {$formationId} is in cart: ", [
+            'training_ids' => $cart->training_ids,
+            'formationId' => $formationId
+        ]);
+        
+        $inCart = in_array($formationId, $cart->training_ids);
+    }
+    
+    return response()->json(['in_cart' => $inCart, 'cart_items' => $cart ? $cart->training_ids : []]);
 }
 }

@@ -336,11 +336,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/panier/count', [PanierController::class, 'getItemsCount']);
 	Route::get('/panier/items', [PanierController::class, 'getCartItems']);
 
+	// Route::get('/panier/check-in-cart/{formationId}', [PanierController::class, 'checkInCart']);
+	Route::get('/panier/check-in-cart/{formationId}', [PanierController::class, 'checkInCart'])->name('panier.check-in-cart');
 
-	Route::get('/panier/check/{formationId}', [PanierController::class,'checkInCart'])->name('panier.check');
+	// Route::get('/panier/check/{formationId}', [PanierController::class,'checkInCart'])->name('panier.check');
 	// Route::get('/panier/items-count', [PanierController::class, 'getItemsCount'])->name('panier.items-count');
 	Route::get('/panier/items-count', [PanierController::class, 'getItemsCount']);
-	Route::post('/panier/check', [PanierController::class, 'check']);
+	// Route::post('/panier/check', [PanierController::class, 'check']);
 	// Route::post('/reservation/create', 'ReservationController@store')->name('api.reservation.create');
 	// Route::post('/api/reservations/create', 'App\Http\Controllers\ReservationController@create');
 	Route::post('/api/reservations/create', [ReservationController::class, 'create']);

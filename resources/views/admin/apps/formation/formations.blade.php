@@ -16,7 +16,6 @@
 }
 </style>
 
-
 @endpush
 @section('content')
 <div class="container-fluid product-wrapper">
@@ -110,16 +109,16 @@
 	                                <img class="img-fluid" src="{{ asset('storage/' . $formation->image) }}" alt="{{ $formation->title }}" />
 	                                <div class="product-hover">
 	                                    <ul>
+                                            
 	                                        <li>
 	                                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#formation-modal-{{ $formation->id }}">
                                                     <i class="icon-eye"></i>
                                                 </a>
+                                                <li>
+                                                    <a href="{{ route('panier.index') }}"><i class="icon-shopping-cart"></i></a>
+                                                </li>
                                                 
 	                                        </li>
-
-                                            <li>
-                                                <a href="{{ route('panier.index') }}"><i class="icon-shopping-cart"></i></a>
-                                            </li>
 
                                             <li>
 	                                            <a href="{{ route('formationedit', $formation->id) }}"><i class="icon-pencil"></i></a>
